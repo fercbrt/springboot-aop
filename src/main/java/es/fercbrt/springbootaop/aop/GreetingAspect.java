@@ -1,6 +1,7 @@
 package es.fercbrt.springbootaop.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,5 +32,17 @@ public class GreetingAspect {
     @AfterThrowing("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
     public void loggerAfterThrowing(JoinPoint joinPoint) {
         logger.info("Goodbye "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (afterThrowing) on " + joinPoint.getSignature().getName());
+    }
+
+    @Around("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    public Object loggerAround(ProceedingJoinPoint joinPoint){
+        logger.info("Hello "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (around) on " + joinPoint.getSignature().getName());
+        try {
+            Object result = joinPoint.proceed();
+            logger.info("Goodbye "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (around) on " + joinPoint.getSignature().getName());
+            return result;
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 }
