@@ -17,4 +17,9 @@ public class GreetingController {
     public ResponseEntity<?> greeting(@RequestParam(value = "name", defaultValue = "World") String name){
         return ResponseEntity.ok(greetingService.sayHello(name));
     }
+
+    @GetMapping("/exception")
+    public ResponseEntity<?> exception(@RequestParam(value = "name", defaultValue = "World") String name){
+        return ResponseEntity.ok(greetingService.exceptionThrower(name));
+    }
 }
