@@ -15,7 +15,7 @@ public class OrderedAspect {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    @Before("GreetingServicePointcut.greetingLoggerPointCut()")
     public void loggerBefore(JoinPoint joinPoint) {
         logger.info("Hello from OrderedAspect (before) on " + joinPoint.getSignature().getName());
     }

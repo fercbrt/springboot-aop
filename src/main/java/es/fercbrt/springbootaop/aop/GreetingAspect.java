@@ -16,27 +16,27 @@ import java.util.Arrays;
 public class GreetingAspect {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Before("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    @Before("GreetingServicePointcut.greetingLoggerPointCut()")
     public void loggerBefore(JoinPoint joinPoint) {
         logger.info("Hello "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (before) on " + joinPoint.getSignature().getName());
     }
 
-    @After("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    @After("GreetingServicePointcut.greetingLoggerPointCut()")
     public void loggerAfter(JoinPoint joinPoint) {
         logger.info("Goodbye "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (after) on " + joinPoint.getSignature().getName());
     }
 
-    @AfterReturning("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    @AfterReturning("GreetingServicePointcut.greetingLoggerPointCut()")
     public void loggerAfterReturning(JoinPoint joinPoint) {
         logger.info("Goodbye "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (afterReturning) on " + joinPoint.getSignature().getName());
     }
 
-    @AfterThrowing("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    @AfterThrowing("GreetingServicePointcut.greetingLoggerPointCut()")
     public void loggerAfterThrowing(JoinPoint joinPoint) {
         logger.info("Goodbye "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (afterThrowing) on " + joinPoint.getSignature().getName());
     }
 
-    @Around("execution(* es.fercbrt.springbootaop.services.impl.GreetingServiceImpl.*(..))")
+    @Around("GreetingServicePointcut.greetingLoggerPointCut()")
     public Object loggerAround(ProceedingJoinPoint joinPoint){
         logger.info("Hello "+ Arrays.toString(joinPoint.getArgs()) +" from GreetingAspect (around) on " + joinPoint.getSignature().getName());
         try {
